@@ -24,7 +24,7 @@
           <div class="collapse navbar-collapse" id="navbarNavDropdown">
             <ul class="navbar-nav ml-auto">
               <li>
-                <%= link_to "Home", "/", class:"fas fa-home nav-link text-light" %>
+                <%= link_to "Home", user_path(current_user.id), class:"fas fa-home nav-link text-light" %>
               </li>
               <% if user_signed_in? %>
                 <li>

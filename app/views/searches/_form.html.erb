@@ -3,7 +3,7 @@
     <%= form_with url: search_path, method: :get, local: true do |f| %>
       <%= f.search_field :content %>
       <%= f.select :model, [ ["User","user"],["Book","book"] ] %>
-      <%= f.select :method, [ ["完全一致","perfect"],["前方一致","prefix"],["後方一致","suffix"]["部分一致","pertial"] ] %>
+      <%= f.select :method, [ ["完全一致","perfect"],["前方一致","prefix"],["後方一致","suffix"],["部分一致","partial"] ] %>
       <%= f.submit "検索" %>
     <% end %>
   </div>

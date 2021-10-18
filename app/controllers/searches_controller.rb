@@ -14,21 +14,21 @@ class SearchesController < ApplicationController
       if method == 'perfect'
         User.where(name: content)
       elsif method == 'prefix'
-        User.where('name LIKE?': content+'%')
+        User.where('name LIKE ?', content+'%')
       elsif method == 'suffix'
-        User.where('name LIKE?': '%'+content)
+        User.where('name LIKE ?', '%'+content)
       elsif method == 'partial'
-        User.where('name LIKE?': '%'+content+'%')
+        User.where('name LIKE ?', '%'+content+'%')
       end
     elsif model == 'book'
       if method == 'perfect'
         Book.where(title: content)
       elsif method == 'prefix'
-        Book.where('name LIKE?': content+'%')
+        Book.where('title LIKE ?', content+'%')
       elsif method == 'suffix'
-        Book.where('name LIKE?': '%'+content)
+        Book.where('title LIKE ?', '%'+content)
       elsif method == 'partial'
-        Book.where('name LIKE?': '%'+content+'%')
+        Book.where('title LIKE ?', '%'+content+'%')
       end
     end
   end

@@ -1,0 +1,21 @@
+<div container>
+  <% if @model == 'user' %>
+    <h2>
+      Users search for "<%= @content %>"
+    </h2>
+    <% if @records.exists? %>
+      <%= render 'relationships/list', users: @records %>
+    <% else %>
+      検索条件にヒットするユーザーは見つかりませんでした。
+    <% end %>
+  <% else %>
+    <h2>
+      Books search for "<%= @content %>"
+    </h2>
+    <% if @records.exists? %>
+      <%= render 'books', books: @records %>
+    <% else %>
+      検索条件にヒットするBookは見つかりませんでした。
+    <% end %>
+  <% end %>
+</div>

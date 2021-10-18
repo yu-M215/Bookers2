@@ -22,6 +22,7 @@ class SearchesController < ApplicationController
       else
         Book.where('title LIKE?': '%'+content+'%')
       end
+    end
   end
 
 end

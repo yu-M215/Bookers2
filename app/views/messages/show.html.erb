@@ -1,0 +1,51 @@
+<% if current_user.following?(@user) %>
+  <% if @user.following?(current_user) %>
+    <div class="container">
+        <div class="row">
+          <h2><%= @user.name %>さんとのチャット</h2>
+          <table class="table">
+            <% @messages.each do |message| %>
+              <% if message.user_id == current_user.id %>
+                <tr class="row justify-content-center">
+                  <td class="col-2">
+                    <%= attachment_image_tag current_user, :profile_image, fallback: "no_image.jpg", size:'70x70', class:"profile-image align-top" %>
+                  </td>
+                  <td class="col-10">
+                    <%= current_user.name %> <br>
+                    <div class="says">
+                      <p><%= safe_join(message.message.split("\n"),tag(:br)) %></p>
+                      <span><%= l message.created_at %></span>
+                    </div>
+                  </td>
+                </tr>
+              <% else %>
+                <tr class="row justify-content-center">
+                  <td class="col-10">
+                    <div class="col-11 float-right">
+                      <%= @user.name %> <br>
+                    </div>
+                    <div class="other-user-says">
+                      <p><%= safe_join(message.message.split("\n"),tag(:br)) %></p>
+                      <span><%= l message.created_at %></span>
+                    </div>
+                  </td>
+                  <td class="col-2">
+                    <%= attachment_image_tag @user, :profile_image, fallback: 'no_image.jpg', size: '70x70', class:"profile-image align-top" %>
+                  </td>
+                </tr>
+              <% end %>
+            <% end %>
+          </table>
+          <%= form_with model: @message, local: true do |f| %>
+            <%= f.text_field :message %>
+            <%= f.hidden_field :room_id %>
+            <%= f.submit "送信", class:"btn btn-sm btn-success chat-btn" %>
+          <% end %>
+        </div>
+    </div>
+  <% else %>
+    <%= @user.name %>さんにフォローされていないため、メッセージの利用はできません。
+  <% end %>
+  <% else %>
+    <%= @user.name %>さんをフォローしていないため、メッセージの利用はできません。
+<% end %>

@@ -20,6 +20,7 @@ class MessagesController < ApplicationController
   def create
     @message = current_user.messages.new(message_params)
     @message.save
+    redirect_back(fallback_location: users_path)
   end
 
   private

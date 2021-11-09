@@ -29,7 +29,13 @@ class BooksController < ApplicationController
     @new_book = Book.new
     @user = User.find(@book.user.id)
     @book_comment = BookComment.new
-    impressionist(@book, nil, unique: [:session_hash.to_s])
+
+    # impressionistを利用した閲覧数のカウント
+    # impressionist(@book, nil, unique: [:session_hash.to_s])
+
+    unless ViewCount.find_by(user_id: current_user.id, book_id: @book.id)
+      current_user.view_counts.create(book_id: @book.id)
+    end
   end
 
   def edit

@@ -20,7 +20,12 @@ class MessagesController < ApplicationController
   def create
     @message = current_user.messages.new(message_params)
     @message.save
-    redirect_back(fallback_location: users_path)
+    # redirect_back(fallback_location: users_path)
+    roomid = @message.room_id
+    room = Room.find(roomid)
+    userid = UserRoom.where(room_id: roomid).where.not(user_id: current_user.id).pluck(:user_id)
+    @user = User.find_by(id: userid)
+    @messages = room.messages
   end
 
   private

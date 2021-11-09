@@ -17,5 +17,5 @@ Rails.application.routes.draw do
   get '/search' => 'searches#search', as: "search"
   get '/message/:id' => 'messages#show', as: "message"
 
-  resources :messages, only: [:create]
+  resources :messages, only: :create
 end

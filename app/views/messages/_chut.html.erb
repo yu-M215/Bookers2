@@ -1,0 +1,31 @@
+<% messages.each do |message| %>
+  <% if message.user_id == current_user.id %>
+    <tr class="row justify-content-center">
+      <td class="col-2">
+        <%= attachment_image_tag current_user, :profile_image, fallback: "no_image.jpg", size:'70x70', class:"profile-image align-top" %>
+      </td>
+      <td class="col-10">
+        <%= current_user.name %> <br>
+        <div class="says">
+          <p><%= safe_join(message.message.split("\n"),tag(:br)) %></p>
+          <span><%= l message.created_at %></span>
+        </div>
+      </td>
+    </tr>
+  <% else %>
+    <tr class="row justify-content-center">
+      <td class="col-10">
+        <div class="col-11 float-right">
+          <%= user.name %> <br>
+        </div>
+        <div class="other-user-says">
+          <p><%= safe_join(message.message.split("\n"),tag(:br)) %></p>
+          <span><%= l message.created_at %></span>
+        </div>
+      </td>
+      <td class="col-2">
+        <%= attachment_image_tag user, :profile_image, fallback: 'no_image.jpg', size: '70x70', class:"profile-image align-top" %>
+      </td>
+    </tr>
+  <% end %>
+<% end %>

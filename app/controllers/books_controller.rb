@@ -29,6 +29,7 @@ class BooksController < ApplicationController
     @new_book = Book.new
     @user = User.find(@book.user.id)
     @book_comment = BookComment.new
+    impressionist(@book, nil, unique: [:session_hash.to_s])
   end
 
   def edit
